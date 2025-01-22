@@ -9,17 +9,28 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function login(Request $reguest) {
+    protected $redirectedTo = '/home';
+
+    public function login() {
         return view("login");
     }
 
-    public function authentication(Request $reguest) {
-        $arr = $reguest->only(["email", "password"]);
-        Auth::attempt($arr);
-        return redirect("home");
+    public function authentication(Request $request) {
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string'],
+        ]);
+
+        if(Auth::attempt($validated)) {
+            return redirect()->intended($this->redirectedTo);
+        }
+
+        return back()->withErrors([
+            'email' => 'Email or password do not match'
+        ])->withInput();
     }
 
-    public function logout(Request $reguest) {
+    public function logout() {
         Auth::logout();
         return redirect("home");
     }

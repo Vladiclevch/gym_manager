@@ -14,9 +14,12 @@ Route::get('/home', function () {
 
 });
 
-Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::get('/register', [RegisterController::class, 'register'])->name('register');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::prefix('auth')->group(function() {
+    Route::get('/login', [LoginController::class, 'login'])->name('login');
+    Route::post('/login', [LoginController::class, 'authentication'])->name('authentication');
 
-Route::post('/login', [LoginController::class, 'authentication'])->name('authentication');
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+    Route::get('/register', [RegisterController::class, 'register'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+});
+
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

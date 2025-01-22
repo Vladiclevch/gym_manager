@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-
     protected $redirectTo = "/login";
 
     public function register()

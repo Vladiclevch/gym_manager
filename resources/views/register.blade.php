@@ -8,5 +8,8 @@
     <input type="password" name="password" required>
     <label>Confirm password</label>
     <input type="password" name="password_confirmation" required>
+    @error('email')
+        <div style="color: red;">{{ $message }}</div>
+    @enderror
     <button type="sudmit">Send</button>
 </form>
