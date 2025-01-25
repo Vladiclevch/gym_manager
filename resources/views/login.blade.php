@@ -1,11 +1,15 @@
 <form method="POST" action="{{ route("authentication") }}">
     @csrf
-    <label>email</label>
+    <label>Email</label>
     <input type="email" name="email" value="">
+
+
     <label>Password</label>
     <input type="password" name="password" value="">
-    @error('email')
+
+    @error('auth')
         <div style="color: red;">{{ $message }}</div>
     @enderror
+
     <button type="sudmit">Send</button>
 </form>

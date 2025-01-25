@@ -26,7 +26,7 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Email or password do not match'
+            'auth' => 'Email or password do not match'
         ])->withInput();
     }
 
