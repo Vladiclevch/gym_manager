@@ -41,6 +41,6 @@ class RegisterController extends Controller
 
         $this->create($request->all());
 
-        return redirect($this->redirectTo);
+        return redirect()->route('login');
     }
 }
